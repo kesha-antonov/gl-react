@@ -2,11 +2,13 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Platform, requireNativeComponent } from "react-native";
+import { View, Platform, requireNativeComponent, NativeModules } from "react-native";
+
+const { EXGLView: EXGLViewManager } = NativeModules;
 
 // A component that acts as an OpenGL render target.
 
-export default class EXGLView extends React.Component {
+class EXGLView extends React.Component {
   static propTypes = {
     // Called when the OpenGL context is created, with the context object as a
     // parameter. The context object has an API mirroring WebGL"s
@@ -49,7 +51,15 @@ export default class EXGLView extends React.Component {
   static NativeView = requireNativeComponent("EXGLView", EXGLView, {
     nativeOnly: { onSurfaceCreate: true },
   });
+
 }
+
+// TODO: MAYBE PASS "exglCtxId" ? OR USE INSTANCE METHOD?
+EXGLView.captureFrame = ({ offsetX, offsetY, width, height, gl }) => {
+  return EXGLViewManager.captureFrame({ offsetX, offsetY, width, height, gl })
+}
+
+export default EXGLView;
 
 // JavaScript WebGL types to wrap around native objects
 class WebGLRenderingContext {}
