@@ -20,6 +20,7 @@ import static fr.greweb.rngl.EXGL.*;
 public class EXGLView extends GLSurfaceView implements GLSurfaceView.Renderer {
   private boolean onSurfaceCreateCalled = false;
   private int exglCtxId = -1;
+  private GL10 gl = null;
 
   public EXGLView(Context context) {
     super(context);
@@ -30,7 +31,8 @@ public class EXGLView extends GLSurfaceView implements GLSurfaceView.Renderer {
     setRenderer(this);
   }
 
-  public void onSurfaceCreated(GL10 unused, EGLConfig config) {
+  public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+    this.gl = gl;
     EGL14.eglSurfaceAttrib(EGL14.eglGetCurrentDisplay(), EGL14.eglGetCurrentSurface(EGL14.EGL_DRAW),
             EGL14.EGL_SWAP_BEHAVIOR, EGL14.EGL_BUFFER_PRESERVED);
 

@@ -55,8 +55,8 @@ class EXGLView extends React.Component {
 }
 
 // TODO: MAYBE PASS "exglCtxId" ? OR USE INSTANCE METHOD?
-EXGLView.captureFrame = ({ offsetX, offsetY, width, height, gl }) => {
-  return EXGLViewManager.captureFrame({ offsetX, offsetY, width, height, gl })
+EXGLView.captureFrame = ({ offsetX, offsetY, width, height, exglViewRef }) => {
+  return EXGLViewManager.captureFrame({ offsetX, offsetY, width, height }, exglViewRef)
 }
 
 export default EXGLView;

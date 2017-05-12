@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View } from "react-native";
-import { GLView as EXGLView } from "expo";
+import EXGLView from "./EXGLView";
 
 const propTypes = {
   onContextCreate: PropTypes.func.isRequired,
@@ -31,6 +31,7 @@ export default class GLViewNative extends Component {
         style={[{ position: "relative", overflow: "hidden" }, style]}
       >
         <EXGLView
+          ref='exglView'
           style={[
             style,
             {
